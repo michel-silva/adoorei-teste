@@ -3,7 +3,7 @@
 
     <jet-authentication-card>
         <template #logo>
-            <img src="/images/app/logo-header.svg">
+            <jet-authentication-card-logo/>
         </template>
 
         <jet-validation-errors class="mb-4" />
