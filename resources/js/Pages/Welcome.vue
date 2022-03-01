@@ -5,7 +5,7 @@
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
-                <img src="/images/app/logo-header.svg">
+                <jet-application-logo />
             </div>
         </div>
 
@@ -16,7 +16,7 @@
 
             <template v-else>
                 <Link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Log in
+                    Login
                 </Link>
 
                 <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 underline">
@@ -95,11 +95,13 @@
 <script>
     import { defineComponent } from 'vue'
     import { Head, Link } from '@inertiajs/inertia-vue3';
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo.vue'
 
     export default defineComponent({
         components: {
             Head,
             Link,
+            JetApplicationLogo,
         },
 
         props: {
