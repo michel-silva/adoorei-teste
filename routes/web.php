@@ -29,6 +29,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/tracking', [
-    TrackController::class, 'index'
-])->name('tracking');
+Route::middleware(['auth:sanctum', 'verified'])->post('/tracking/updateTracks', [TrackController::class, 'updateTracks']);
+
+Route::middleware(['auth:sanctum', 'verified'])->resource('/tracking', TrackController::class, [
+    'names' => [
+        'index' => 'trackingGet',
+        'store' => 'trackingPost'
+    ]
+]);
