@@ -48,7 +48,9 @@ class Track extends Model
             'Objeto aguardando retirada no endereço indicado' => 'Retirada',
             'Objeto saiu para entrega ao destinatário' => 'Saiu para Entrega',
             'Objeto entregue ao destinatário' => 'Entregue',
-            'Objeto devolvido ao país de origem' => 'Devolvido'
+            'Objeto devolvido ao país de origem' => 'Devolvido',
+
+            'Objeto recebido pelos Correios do Brasil' => 'Recebido no Brasil' //status não previsto no escopo do teste
         ];
     }
 
