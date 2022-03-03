@@ -35,14 +35,17 @@ class Correios {
             $data_hora = new DateTime($return->objetos[0]->eventos[0]->dtHrCriado);
 
             $data['last_update'] = $data_hora->format('d/m/Y - h:m') .' - ' .$descricao;
-            $data['status'] = $status[$descricao];
+
+            //when statusType is not defined in Track::getStatusTypes the field $descricao is set
+            $data['status'] = ( isset($status[$descricao]) ) ? $status[$descricao] : $descricao;
+
         } else {
             $data['last_update'] = 'Aguardando Postagem';
             $data['status'] = 'Aguardando Postagem';
+
         }
 
         return $data;
-
 
     }
 }
