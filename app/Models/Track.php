@@ -13,11 +13,15 @@ class Track extends Model
 
     protected $fillable = [
         'tracking_number',
-        'history',
         'status',
         'last_update',
         'user_id'
     ];
+
+    public function events()
+    {
+        return $this->hasMany(TrackEvent::class);
+    }
 
     /**
      * The "booted" method of the model.
@@ -31,10 +35,11 @@ class Track extends Model
         });
     }
 
-    protected static function boot() {
+    protected static function boot()
+    {
         parent::boot();
-        static::addGlobalScope('test', function(Builder $builder) {
-           $builder->where('user_id', Auth::id());
+        static::addGlobalScope('test', function (Builder $builder) {
+            $builder->where('user_id', Auth::id());
         });
     }
 
@@ -42,20 +47,55 @@ class Track extends Model
     static function getStatusTypes()
     {
         return [
-            '' => 'Aguardando Postagem',
-            'Objeto postado' => 'Postado',
-            'Objeto em trânsito - por favor aguarde' => 'Em trânsito',
-            'Objeto aguardando retirada no endereço indicado' => 'Retirada',
-            'Objeto saiu para entrega ao destinatário' => 'Saiu para Entrega',
-            'Objeto entregue ao destinatário' => 'Entregue',
-            'Objeto devolvido ao país de origem' => 'Devolvido',
+            '' =>
+            [
+                'short_status' => 'Aguardando Postagem',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto postado' =>
+            [
+                'short_status' => 'Postado',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto em trânsito - por favor aguarde' =>
+            [
+                'short_status' => 'Em trânsito',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto aguardando retirada no endereço indicado' =>
+            [
+                'short_status' => 'Retirada',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto saiu para entrega ao destinatário' =>
+            [
+                'short_status' => 'Saiu para Entrega',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto entregue ao destinatário' =>
+            [
+                'short_status' => 'Entregue',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
+            'Objeto devolvido ao país de origem' =>
+            [
+                'short_status' => 'Devolvido',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ],
 
-            'Objeto recebido pelos Correios do Brasil' => 'Recebido no Brasil' //status não previsto no escopo do teste
+            'Objeto recebido pelos Correios do Brasil' =>
+            [
+                'short_status' => 'Recebido no Brasil',
+                'icon-dashboard' => 'fa-solid fa-truck-fast',
+                'background-color-card' => 'bg-blue-600'
+            ] //status não previsto no escopo do teste
         ];
     }
-
-    protected $cast = [
-        'history' => 'array'
-    ];
-
 }
