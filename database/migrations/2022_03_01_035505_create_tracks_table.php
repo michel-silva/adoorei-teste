@@ -16,7 +16,6 @@ class CreateTracksTable extends Migration
         Schema::create('tracks', function (Blueprint $table) {
             $table->id();
             $table->string('tracking_number');
-            $table->text('history');
             $table->string('status');
             $table->timestamps();
         });
