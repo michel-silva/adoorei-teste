@@ -1,8 +1,5 @@
 <template>
   <app-layout title="RASTREAMENTO DE ENCOMENDAS">
-    <!-- <div class="w-1/4 py-8 bg-slate-200">
-      <img class="object-fill mx-auto px-4" src="/images/app/logo-header.svg" />
-    </div> -->
     <template #header>
       <div class="flex justify-between">
         <div class="px-4 py-3">
@@ -15,6 +12,8 @@
           <jet-button @click="openModalTracking()">
             Cadastrar Código
           </jet-button>
+          <jet-input-error :message="errors.tracking_number" class="mt-2" />
+
           <jet-button
             class="lg:ml-2 md:mt-2 sm:mt-2"
             @click="updateTrackingCodes()"
@@ -85,12 +84,14 @@
 
 
 <script>
-import { defineComponent } from "vue"
-import AppLayout from "@/Layouts/AppLayout.vue"
-import JetDialogModal from "@/Jetstream/DialogModal.vue"
-import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue"
-import JetButton from "@/Jetstream/Button.vue"
-import TracksList from "@/Pages/Tracking/TracksList.vue"
+import { defineComponent } from "vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
+import JetDialogModal from "@/Jetstream/DialogModal.vue";
+import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
+import JetButton from "@/Jetstream/Button.vue";
+import JetInputError from "@/Jetstream/InputError.vue"
+
+import TracksList from "@/Pages/Tracking/TracksList.vue";
 
 export default defineComponent({
   components: {
@@ -98,9 +99,11 @@ export default defineComponent({
     JetDialogModal,
     JetSecondaryButton,
     JetButton,
+    JetInputError,
+
     TracksList,
   },
-  props: ["tracks", "statusTypes"],
+  props: ["tracks", "statusTypes", "errors"],
   data() {
     return {
       isTrackingModalOpen: false,
