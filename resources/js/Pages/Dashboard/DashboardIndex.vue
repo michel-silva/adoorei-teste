@@ -9,7 +9,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <welcome />
+                    <DashboardDetail :countTracksGroup="countTracksGroup" :totalTracks="totalTracks" :statusTypes="statusTypes"/>
                 </div>
             </div>
         </div>
@@ -20,11 +20,14 @@
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
     import Welcome from '@/Jetstream/Welcome.vue'
+    import DashboardDetail from '@/Pages/Dashboard/DashboardDetail.vue'
 
     export default defineComponent({
         components: {
             AppLayout,
             Welcome,
+            DashboardDetail,
         },
+        props: ['countTracksGroup', 'totalTracks', 'statusTypes']
     })
 </script>
