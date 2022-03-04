@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TrackController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,13 +26,13 @@ Route::get('/', function () {
     ]);
 })->name('start');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->prefix('/dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/tracking/updateTracks', [TrackController::class, 'updateTracks']);
-
 Route::middleware(['auth:sanctum', 'verified'])->resource('/tracking', TrackController::class, [
+    'only' => ['index', 'store'],
     'names' => [
         'index' => 'trackingGet',
         'store' => 'trackingPost'
