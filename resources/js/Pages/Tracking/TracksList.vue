@@ -40,6 +40,7 @@
       Sem códigos para mostrar
     </div>
     <table
+        v-if="sortedFilterTracks.length > 0"
       class="table-auto w-11/12 mx-auto">
       <thead>
         <tr>
