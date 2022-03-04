@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Track;
+use App\Models\TrackEvent;
 use App\Support\Getaway\Correios;
 use Illuminate\Console\Command;
 
@@ -44,7 +45,11 @@ class UpdateTrackingStatus extends Command
 
         foreach ($tracks as $track) {
             $data = $correios->getDataWebServer($track->tracking_number);
-            Track::find($track->id)->update($data);
+            $track = Track::find($track->id);
+
+            $track->update($data);
+
+            TrackEvent::where('track_id', $track->id)->delete();
 
             foreach ($data['events'] as $event) {
                 $track->events()->updateOrCreate([
