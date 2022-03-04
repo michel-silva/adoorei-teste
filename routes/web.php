@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/dashboard')->group(fun
 
 Route::middleware(['auth:sanctum', 'verified'])->post('/tracking/updateTracks', [TrackController::class, 'updateTracks']);
 Route::middleware(['auth:sanctum', 'verified'])->resource('/tracking', TrackController::class, [
-    'only' => ['index', 'store'],
+    'only' => ['index', 'store', 'destroy'],
     'names' => [
         'index' => 'trackingGet',
         'store' => 'trackingPost'
