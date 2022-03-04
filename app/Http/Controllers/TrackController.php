@@ -14,6 +14,7 @@ use Inertia\Inertia;
 
 class TrackController extends Controller
 {
+
     /**
      * Update all tracking codes status
      *
@@ -34,10 +35,11 @@ class TrackController extends Controller
      */
     public function index(Request $request)
     {
-        $tracks = Track::get();
+        $tracks = Track::with('events')->get();
+
         $status = Track::getStatusTypes();
 
-        return Inertia::render('Tracking/index', [
+        return Inertia::render('Tracking/TracksIndex', [
             'tracks' => $tracks,
             'statusTypes' => $status
         ]);
@@ -60,14 +62,26 @@ class TrackController extends Controller
         $correios = new Correios();
         $data = $correios->getDataWebServer($data['tracking_number']);
 
-        Track::create($data);
+        $events = $data['events'];
+        unset($data['events']);
+
+        $track = Track::create($data);
+
+        foreach ($events as $event) {
+            $track->events()->updateOrCreate([
+                'track_id' => $track->id,
+                'date_event' => $event->dtHrCriado,
+                'event' => $event->descricao,
+                'unit' => json_encode($event->unidade)
+            ]);
+        }
 
         return redirect()->back()
                     ->with('message', 'Código Cadastrado com Sucesso.');
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Destroy resource.
      *
      * @return Response
      */
@@ -80,4 +94,6 @@ class TrackController extends Controller
             return redirect()->back();
         }
     }
+
+
 }
