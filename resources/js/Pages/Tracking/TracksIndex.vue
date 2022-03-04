@@ -46,6 +46,7 @@
 
     <template #content>
       <input
+        ref="inputTrack"
         type="text"
         class="
           shadow
@@ -89,7 +90,8 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import JetDialogModal from "@/Jetstream/DialogModal.vue";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton.vue";
 import JetButton from "@/Jetstream/Button.vue";
-import JetInputError from "@/Jetstream/InputError.vue"
+import JetInput from "@/Jetstream/Input.vue";
+import JetInputError from "@/Jetstream/InputError.vue";
 
 import TracksList from "@/Pages/Tracking/TracksList.vue";
 
@@ -99,6 +101,7 @@ export default defineComponent({
     JetDialogModal,
     JetSecondaryButton,
     JetButton,
+    JetInput,
     JetInputError,
 
     TracksList,
@@ -118,6 +121,9 @@ export default defineComponent({
     },
     openModalTracking() {
       this.isTrackingModalOpen = true;
+      this.$nextTick(function () {
+        this.$refs.inputTrack.focus();
+      });
     },
     closeModalTracking() {
       this.isTrackingModalOpen = false;
