@@ -37,7 +37,7 @@
 
   <div class="overflow-x-auto pt-4">
     <div v-if="sortedFilterTracks.length <= 0" class="text-center">
-      Sem códigos para mostrar
+      Sem códigos monitorados
     </div>
     <table
         v-if="sortedFilterTracks.length > 0"
@@ -268,7 +268,6 @@ export default defineComponent({
         this.filterType = value;
       }
     },
-
     sort(s) {
       if (s === this.currentSort) {
         this.currentSortDir = this.currentSortDir === "asc" ? "desc" : "asc";
