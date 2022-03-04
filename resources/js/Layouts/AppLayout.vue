@@ -5,7 +5,7 @@
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b border-gray-100 sticky top-0 z-10">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -24,7 +24,7 @@
                                 </jet-nav-link>
 
                                 <jet-nav-link :href="route('trackingGet')" :active="route().current('trackingGet')">
-                                    Rastrear
+                                    Rastreamento
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
 
                             <!-- Settings Dropdown -->
                             <div class="ml-3 relative">
-                                <jet-dropdown align="right" width="48">
+                                <jet-dropdown align="right" width="48" class="z-0">
                                     <template #trigger>
                                         <button v-if="$page.props.jetstream.managesProfilePhotos" class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                             <img class="h-8 w-8 rounded-full object-cover" :src="$page.props.user.profile_photo_url" :alt="$page.props.user.name" />
@@ -50,7 +50,7 @@
                                         </span>
                                     </template>
 
-                                    <template #content>
+                                    <template #content >
                                         <!-- Account Management -->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
                                             Gerenciar Conta
@@ -96,7 +96,7 @@
                             Dashboard
                         </jet-responsive-nav-link>
                         <jet-responsive-nav-link :href="route('trackingGet')" :active="route().current('trackingGet')">
-                            Rastrear
+                            Rastreamento
                         </jet-responsive-nav-link>
                     </div>
 
@@ -115,7 +115,7 @@
 
                         <div class="mt-3 space-y-1">
                             <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
-                                Profile
+                                Perfil
                             </jet-responsive-nav-link>
 
                             <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.props.jetstream.hasApiFeatures">
@@ -125,7 +125,7 @@
                             <!-- Authentication -->
                             <form method="POST" @submit.prevent="logout">
                                 <jet-responsive-nav-link as="button">
-                                    Log Out
+                                    Sair
                                 </jet-responsive-nav-link>
                             </form>
 
@@ -170,8 +170,8 @@
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-white shadow sticky top-16" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 ">
                     <slot name="header"></slot>
                 </div>
             </header>
