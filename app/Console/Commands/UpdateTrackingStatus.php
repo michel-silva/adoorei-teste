@@ -45,6 +45,15 @@ class UpdateTrackingStatus extends Command
         foreach ($tracks as $track) {
             $data = $correios->getDataWebServer($track->tracking_number);
             Track::find($track->id)->update($data);
+
+            foreach ($data['events'] as $event) {
+                $track->events()->updateOrCreate([
+                    'track_id' => $track->id,
+                    'date_event' => $event->dtHrCriado,
+                    'event' => $event->descricao,
+                    'unit' => json_encode($event->unidade)
+                ]);
+            }
         }
 
         return 0;
